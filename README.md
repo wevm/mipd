@@ -66,7 +66,7 @@ Event detail from `eip6963:announceProvider`.
 #### Import
 
 ```ts
-import { EIP6963ProviderDetail } from 'mipd'
+import type { EIP6963ProviderDetail } from 'mipd'
 ```
 
 #### Definition
@@ -85,7 +85,7 @@ Metadata of the EIP-1193 Provider.
 #### Import
 
 ```ts
-import { EIP6963ProviderInfo } from 'mipd'
+import type { EIP6963ProviderInfo } from 'mipd'
 ```
 
 #### Definition
@@ -106,7 +106,7 @@ Event type to announce an EIP-1193 Provider.
 #### Import
 
 ```ts
-import { EIP6963AnnounceProviderEvent } from 'mipd'
+import type { EIP6963AnnounceProviderEvent } from 'mipd'
 ```
 
 #### Definition
@@ -125,7 +125,7 @@ Event type to request EIP-1193 Providers.
 #### Import
 
 ```ts
-import { EIP6963RequestProviderEvent } from 'mipd'
+import type { EIP6963RequestProviderEvent } from 'mipd'
 ```
 
 #### Definition
@@ -147,7 +147,7 @@ In some cases you might want to tune the global configuration (ie. the `EIP1193P
 Configuration options are customizable using [declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html). Extend the `Config` interface either directly in your code or in a `d.ts` file (e.g. `eip6963.d.ts`):
 
 ```ts
-import { EIP1193Provider } from './eip1193-provider'
+import type { EIP1193Provider } from './eip1193-provider'
 
 declare global {
   interface Config {
