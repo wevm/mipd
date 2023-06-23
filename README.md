@@ -140,9 +140,10 @@ export interface EIP6963RequestProviderEvent extends Event {
 
 In some cases you might want to tune the global configuration (ie. the `EIP1193Provider`). To do this, the following configuration options are available:
 
-| Type                | Default                          | Description            |
-| ------------------- | -------------------------------- | ---------------------- |
-| `EIP1193Provider`   | `import('viem').EIP1193Provider` | The EIP-1193 Provider. |
+| Type                | Default                                         | Description            |
+| ------------------- | ----------------------------------------------- | ---------------------- |
+| `EIP1193Provider`   | `import('viem').EIP1193Provider`                | The EIP-1193 Provider. |
+| `Rdns`              | `'com.enkrypt' | 'io.metamask' | (string & {})` | Deterministic identifier for the Provider in the form of an rDNS (Reverse Domain Name Notation) |
 
 Configuration options are customizable using [declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html). Extend the `Config` interface either directly in your code or in a `d.ts` file (e.g. `eip6963.d.ts`):
 
@@ -152,6 +153,7 @@ import type { EIP1193Provider } from './eip1193-provider'
 declare global {
   interface Config {
     EIP1193Provider: EIP1193Provider
+    Rdns: 'com.myapp' | 'com.example' | (string & {})
   }
 }
 ```
