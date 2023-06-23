@@ -6,7 +6,7 @@ import {
   EIP6963ProviderDetail,
   EIP6963ProviderInfo,
   EIP6963RequestProviderEvent,
-} from './index.js'
+} from './eip6963.js'
 
 test('EIP6963ProviderInfo', () => {
   expectTypeOf<EIP6963ProviderInfo['icon']>().toEqualTypeOf<string>

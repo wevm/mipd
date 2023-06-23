@@ -5,7 +5,7 @@ import { EIP1193Provider } from 'viem'
  *
  * @example
  * import { EIP1193Provider } from './eip1193'
- * 
+ *
  * declare module 'mipd' {
  *   export interface Config {
  *     EIP1193Provider: EIP1193Provider
@@ -22,6 +22,8 @@ export interface Config {
 export interface DefaultConfig {
   /** The EIP-1193 Provider. */
   EIP1193Provider: EIP1193Provider
+  /** Reverse Domain Name Notation (rDNS) of the Wallet Provider. */
+  Rdns: 'com.enkrypt' | 'io.metamask' | (string & {})
 }
 
 /**
@@ -36,6 +38,9 @@ export interface ResolvedConfig {
   EIP1193Provider: IsDefined<Config['EIP1193Provider']> extends true
     ? Config['EIP1193Provider']
     : DefaultConfig['EIP1193Provider']
+  Rdns: IsDefined<Config['Rdns']> extends true
+    ? Config['Rdns']
+    : DefaultConfig['Rdns']
 }
 
 type IsDefined<T> = T extends undefined ? false : true
