@@ -38,9 +38,9 @@ window.addEventListener(
     event.detail
     //    ^? EIP6963ProviderDetail
     event.detail.info
-    //    ^? EIP6963ProviderInfo
+    //           ^? EIP6963ProviderInfo
     event.detail.provider
-    //    ^? EIP1193Provider
+    //           ^? EIP1193Provider
   }
 )
 
