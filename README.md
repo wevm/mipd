@@ -143,7 +143,7 @@ In some cases you might want to tune the global configuration (ie. the `EIP1193P
 | Type                | Default                                         | Description            |
 | ------------------- | ----------------------------------------------- | ---------------------- |
 | `EIP1193Provider`   | `import('viem').EIP1193Provider`                | The EIP-1193 Provider. |
-| `Rdns`              | `'com.enkrypt' | 'io.metamask' | (string & {})` | Deterministic identifier for the Provider in the form of an rDNS (Reverse Domain Name Notation) |
+| `Rdns`              | `'com.enkrypt' \| 'io.metamask' \| (string & {})` | Deterministic identifier for the Provider in the form of an rDNS (Reverse Domain Name Notation) |
 
 Configuration options are customizable using [declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html). Extend the `Config` interface either directly in your code or in a `d.ts` file (e.g. `eip6963.d.ts`):
 
