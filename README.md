@@ -28,10 +28,10 @@ import 'mipd/window'
 
 window.addEventListener(
   'eip6963:announceProvider'
-// ^? 'eip6963:announceProvider' | 'eip6963:requestProvider' | 'click' | ...
+  // ^? 'eip6963:announceProvider' | 'eip6963:requestProvider' | 'click' | ...
 
   event => {
-// ^? EIP6963AnnounceProviderEvent
+  // ^? EIP6963AnnounceProviderEvent
 
     event.type
     //    ^? 'eip6963:announceProvider'
@@ -46,10 +46,10 @@ window.addEventListener(
 
 window.addEventListener(
   'eip6963:requestProvider'
-// ^? 'eip6963:announceProvider' | 'eip6963:requestProvider' | 'click' | ...
+  // ^? 'eip6963:announceProvider' | 'eip6963:requestProvider' | 'click' | ...
 
   event => {
-// ^? EIP6963RequestProviderEvent
+  // ^? EIP6963RequestProviderEvent
 
     event.type
     //    ^? 'eip6963:requestProvider'
