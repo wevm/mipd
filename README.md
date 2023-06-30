@@ -17,7 +17,7 @@ npm i mipd
 
 ## Utilities
 
-Soon.
+###
 
 ## `window` Polyfill
 

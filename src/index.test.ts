@@ -9,7 +9,7 @@ import {
   type EIP6963ProviderDetail,
   type Listener,
   announceProvider,
-  mipdStore,
+  createStore,
   requestProviders,
 } from './index.js'
 
@@ -33,98 +33,98 @@ const detail_2 = {
   provider: '<EIP1193Provider_2>' as unknown as EIP1193Provider,
 } as const satisfies EIP6963ProviderDetail
 
-describe('mipdStore', () => {
+describe('createStore', () => {
   test('_listeners', () => {
-    const mipd = mipdStore()
+    const store = createStore()
 
-    const unsubscribe_1 = mipd.subscribe(() => {})
-    expect(mipd._listeners().size).toBe(1)
+    const unsubscribe_1 = store.subscribe(() => {})
+    expect(store._listeners().size).toBe(1)
 
-    const unsubscribe_2 = mipd.subscribe(() => {})
-    mipd.subscribe(() => {})
-    expect(mipd._listeners().size).toBe(3)
+    const unsubscribe_2 = store.subscribe(() => {})
+    store.subscribe(() => {})
+    expect(store._listeners().size).toBe(3)
 
-    mipd.subscribe(() => {})
-    expect(mipd._listeners().size).toBe(4)
+    store.subscribe(() => {})
+    expect(store._listeners().size).toBe(4)
 
     unsubscribe_1()
-    expect(mipd._listeners().size).toBe(3)
+    expect(store._listeners().size).toBe(3)
     unsubscribe_2()
-    expect(mipd._listeners().size).toBe(2)
+    expect(store._listeners().size).toBe(2)
 
-    mipd.destroy()
-    expect(mipd._listeners().size).toBe(0)
+    store.destroy()
+    expect(store._listeners().size).toBe(0)
   })
 
   test('clear', () => {
-    const mipd = mipdStore()
+    const store = createStore()
 
-    mipd.subscribe(() => {})
-    mipd.subscribe(() => {})
+    store.subscribe(() => {})
+    store.subscribe(() => {})
     announceProvider(detail_1)()
     announceProvider(detail_2)()
-    expect(mipd.getProviders().length).toBe(2)
+    expect(store.getProviders().length).toBe(2)
 
-    mipd.clear()
-    expect(mipd.getProviders().length).toBe(0)
+    store.clear()
+    expect(store.getProviders().length).toBe(0)
   })
 
   test('destroy', () => {
-    const mipd = mipdStore()
+    const store = createStore()
 
     // Setting up listeners and announcing some provider details.
-    mipd.subscribe(() => {})
-    mipd.subscribe(() => {})
-    mipd.subscribe(() => {})
-    mipd.subscribe(() => {})
+    store.subscribe(() => {})
+    store.subscribe(() => {})
+    store.subscribe(() => {})
+    store.subscribe(() => {})
     announceProvider(detail_1)()
     announceProvider(detail_2)()
-    expect(mipd.getProviders().length).toBe(2)
-    expect(mipd._listeners().size).toBe(4)
+    expect(store.getProviders().length).toBe(2)
+    expect(store._listeners().size).toBe(4)
 
     // Destroying should clear listeners and provider details.
-    mipd.destroy()
-    expect(mipd.getProviders().length).toBe(0)
-    expect(mipd._listeners().size).toBe(0)
+    store.destroy()
+    expect(store.getProviders().length).toBe(0)
+    expect(store._listeners().size).toBe(0)
 
     announceProvider(detail_1)()
     announceProvider(detail_2)()
 
-    expect(mipd.getProviders().length).toBe(0)
-    expect(mipd._listeners().size).toBe(0)
+    expect(store.getProviders().length).toBe(0)
+    expect(store._listeners().size).toBe(0)
 
     // Resetting after destroy should work and emit provider details.
-    mipd.reset()
+    store.reset()
 
-    mipd.subscribe(() => {})
-    mipd.subscribe(() => {})
+    store.subscribe(() => {})
+    store.subscribe(() => {})
     announceProvider(detail_1)()
     announceProvider(detail_2)()
 
-    expect(mipd.getProviders().length).toBe(2)
-    expect(mipd._listeners().size).toBe(2)
+    expect(store.getProviders().length).toBe(2)
+    expect(store._listeners().size).toBe(2)
 
-    mipd.destroy()
+    store.destroy()
   })
 
   test('find', () => {
-    const mipd = mipdStore()
+    const store = createStore()
 
     announceProvider(detail_1)()
-    expect(mipd.findProvider({ rdns: 'org.example' })).toBe(detail_1)
-    expect(mipd.findProvider({ rdns: 'org.foo' })).toBe(undefined)
+    expect(store.findProvider({ rdns: 'org.example' })).toBe(detail_1)
+    expect(store.findProvider({ rdns: 'org.foo' })).toBe(undefined)
 
     announceProvider(detail_2)()
-    expect(mipd.findProvider({ rdns: 'org.foo' })).toBe(detail_2)
+    expect(store.findProvider({ rdns: 'org.foo' })).toBe(detail_2)
 
-    mipd.destroy()
+    store.destroy()
   })
 
   test('get', async () => {
-    const mipd = mipdStore()
+    const store = createStore()
 
     announceProvider(detail_1)()
-    expect(mipd.getProviders()).toMatchInlineSnapshot(`
+    expect(store.getProviders()).toMatchInlineSnapshot(`
       [
         {
           "info": {
@@ -140,7 +140,7 @@ describe('mipdStore', () => {
 
     await new Promise((resolve) => setTimeout(resolve, 1000))
     announceProvider(detail_2)()
-    expect(mipd.getProviders()).toMatchInlineSnapshot(`
+    expect(store.getProviders()).toMatchInlineSnapshot(`
       [
         {
           "info": {
@@ -165,7 +165,7 @@ describe('mipdStore', () => {
 
     // Test duplicate emitted detail
     announceProvider(detail_2)()
-    expect(mipd.getProviders()).toMatchInlineSnapshot(`
+    expect(store.getProviders()).toMatchInlineSnapshot(`
       [
         {
           "info": {
@@ -188,27 +188,27 @@ describe('mipdStore', () => {
       ]
     `)
 
-    return mipd.destroy()
+    return store.destroy()
   })
 
   test('remove', () => {
-    const mipd = mipdStore()
+    const store = createStore()
 
     const results: Parameters<Listener>[] = []
-    mipd.subscribe((providerDetails, providerDetail) =>
+    store.subscribe((providerDetails, providerDetail) =>
       results.push([providerDetails, providerDetail]),
     )
 
     announceProvider(detail_1)()
     announceProvider(detail_2)()
-    expect(mipd.getProviders().length).toBe(2)
+    expect(store.getProviders().length).toBe(2)
 
-    mipd.removeProvider({ rdns: detail_1.info.rdns })
-    mipd.removeProvider({ rdns: 'bogus' })
-    expect(mipd.getProviders().length).toBe(1)
+    store.removeProvider({ rdns: detail_1.info.rdns })
+    store.removeProvider({ rdns: 'bogus' })
+    expect(store.getProviders().length).toBe(1)
 
-    mipd.removeProvider({ rdns: detail_2.info.rdns })
-    expect(mipd.getProviders().length).toBe(0)
+    store.removeProvider({ rdns: detail_2.info.rdns })
+    expect(store.getProviders().length).toBe(0)
 
     expect(results).toMatchInlineSnapshot(`
       [
@@ -318,27 +318,27 @@ describe('mipdStore', () => {
       ]
     `)
 
-    mipd.destroy()
+    store.destroy()
   })
 
   test('reset', () => {
-    const mipd = mipdStore()
+    const store = createStore()
 
     announceProvider(detail_1)()
     announceProvider(detail_2)()
-    expect(mipd.getProviders().length).toBe(2)
+    expect(store.getProviders().length).toBe(2)
 
-    mipd.reset()
-    expect(mipd.getProviders().length).toBe(0)
+    store.reset()
+    expect(store.getProviders().length).toBe(0)
 
-    mipd.destroy()
+    store.destroy()
   })
 
   test('subscribe', async () => {
-    const mipd = mipdStore()
+    const store = createStore()
 
     let results: Parameters<Listener>[] = []
-    const unsubscribe = mipd.subscribe((providerDetails, providerDetail) =>
+    const unsubscribe = store.subscribe((providerDetails, providerDetail) =>
       results.push([providerDetails, providerDetail]),
     )
 
@@ -418,7 +418,7 @@ describe('mipdStore', () => {
 
     results = []
 
-    mipd.destroy()
+    store.destroy()
     expect(results).toMatchInlineSnapshot(`
       [
         [
@@ -458,23 +458,23 @@ describe('mipdStore', () => {
 
     expect(results).toHaveLength(0)
 
-    mipd.destroy()
+    store.destroy()
   })
 
   test('subscribe (once)', () => {
-    const mipd = mipdStore()
+    const store = createStore()
 
     announceProvider(detail_1)()
     announceProvider(detail_2)()
 
     const results: Parameters<Listener>[] = []
-    mipd.subscribe((providerDetails, providerDetail) =>
+    store.subscribe((providerDetails, providerDetail) =>
       results.push([providerDetails, providerDetail]),
     )
 
     expect(results.length).toBe(0)
 
-    mipd.subscribe(
+    store.subscribe(
       (providerDetails, providerDetail) =>
         results.push([providerDetails, providerDetail]),
       { once: true },

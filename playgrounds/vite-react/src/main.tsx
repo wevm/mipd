@@ -1,11 +1,11 @@
-import { mipdStore } from 'mipd'
+import { createStore } from 'mipd'
 import { useSyncExternalStore } from 'react'
 import ReactDOM from 'react-dom/client'
 
-const mipd = mipdStore()
+const store = createStore()
 
 export default function App() {
-  const providers = useSyncExternalStore(mipd.subscribe, mipd.getProviders)
+  const providers = useSyncExternalStore(store.subscribe, store.getProviders)
   return <pre>{JSON.stringify(providers, null, 2)}</pre>
 }
 

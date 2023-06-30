@@ -104,10 +104,10 @@
   },
   "size-limit": [
     {
-      "name": "import { mipdStore } from 'mipd'",
+      "name": "import { createStore } from 'mipd'",
       "path": "./dist/esm/index.js",
       "limit": "386 B",
-      "import": "{ mipdStore }"
+      "import": "{ createStore }"
     },
     {
       "name": "import { requestProviders } from 'mipd'",

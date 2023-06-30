@@ -27,7 +27,7 @@ export type Listener = (
   },
 ) => void
 
-export type MipdStore = {
+export type CreateStore = {
   /**
    * @internal
    * Current state of listening listeners.
@@ -63,7 +63,7 @@ export type MipdStore = {
   subscribe(listener: Listener, args?: { once?: boolean }): () => void
 }
 
-export function mipdStore(): MipdStore {
+export function createStore(): CreateStore {
   const listeners: Set<Listener> = new Set()
   let providerDetails: EIP6963ProviderDetail[] = []
 
