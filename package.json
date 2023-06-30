@@ -1,7 +1,7 @@
 {
   "name": "mipd",
   "description": "TypeScript Utilities for EIP-6963",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "build": "pnpm run clean && pnpm run build:cjs && pnpm run build:esm && pnpm run build:types",
     "build:cjs": "tsc --project tsconfig.build.json --module commonjs --outDir ./dist/cjs --removeComments --verbatimModuleSyntax false && echo > ./dist/cjs/package.json '{\"type\":\"commonjs\"}'",
