@@ -1,12 +1,12 @@
-import { EIP1193Provider } from 'viem'
+import type { EIP1193Provider } from 'viem'
 import { expectTypeOf, test } from 'vitest'
 
-import {
+import type {
   EIP6963AnnounceProviderEvent,
   EIP6963ProviderDetail,
   EIP6963ProviderInfo,
   EIP6963RequestProviderEvent,
-} from './eip6963.js'
+} from './index.js'
 
 test('EIP6963ProviderInfo', () => {
   expectTypeOf<EIP6963ProviderInfo['icon']>().toEqualTypeOf<string>

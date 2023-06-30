@@ -3,26 +3,34 @@
   "description": "TypeScript Utilities for EIP-6963",
   "version": "0.0.0",
   "scripts": {
-    "build": "tsc --project tsconfig.build.json",
+    "build": "pnpm run clean && pnpm run build:cjs && pnpm run build:esm && pnpm run build:types",
+    "build:cjs": "tsc --project tsconfig.build.json --module commonjs --outDir ./dist/cjs --removeComments --verbatimModuleSyntax false && echo > ./dist/cjs/package.json '{\"type\":\"commonjs\"}'",
+    "build:esm": "tsc --project tsconfig.build.json --module es2015 --outDir ./dist/esm && echo > ./dist/esm/package.json '{\"type\":\"module\",\"sideEffects\":false}'",
+    "build:types": "tsc --project tsconfig.build.json --module esnext --declarationDir ./dist/types --emitDeclarationOnly --declaration --declarationMap",
     "changeset": "changeset",
     "changeset:release": "pnpm build && changeset publish",
     "changeset:version": "changeset version && pnpm install --lockfile-only && pnpm bun scripts/updateVersion.ts",
+    "clean": "rimraf dist",
     "format": "rome format . --write",
     "lint": "rome check .",
     "lint:fix": "pnpm lint --apply",
     "preinstall": "npx only-allow pnpm",
     "prepare": "npx simple-git-hooks",
     "prepublishOnly": "pnpm bun scripts/prepublishOnly.ts",
+    "size": "size-limit",
     "test": "vitest dev",
     "test:cov": "vitest dev --coverage",
     "typecheck": "tsc --noEmit && vitest typecheck"
   },
   "type": "module",
-  "main": "./src/index.js",
-  "types": "./types/index.d.ts",
-  "typings": "./types/index.d.ts",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
+  "typings": "./dist/types/index.d.ts",
   "sideEffects": false,
   "files": [
+    "dist",
+    "!dist/**/*.tsbuildinfo",
     "src/**/*.ts",
     "!src/**/*.test.ts",
     "!src/**/*.test-d.ts",
@@ -30,12 +38,14 @@
   ],
   "exports": {
     ".": {
-      "types": "./types/index.d.ts",
-      "default": "./src/index.js"
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "default": "./dist/cjs/index.js"
     },
     "./window": {
-      "types": "./types/window.d.ts",
-      "default": "./src/window.js"
+      "types": "./dist/types/window.d.ts",
+      "import": "./dist/esm/window.js",
+      "default": "./dist/cjs/window.js"
     },
     "./package.json": "./package.json"
   },
@@ -57,13 +67,16 @@
   "devDependencies": {
     "@changesets/changelog-github": "^0.4.8",
     "@changesets/cli": "^2.26.1",
+    "@size-limit/preset-small-lib": "^8.2.6",
     "@types/fs-extra": "^11.0.1",
     "@types/node": "^20.3.1",
     "@vitest/coverage-v8": "^0.32.2",
     "fs-extra": "^11.1.1",
     "jsdom": "^22.1.0",
+    "rimraf": "^5.0.1",
     "rome": "~12.1.3",
     "simple-git-hooks": "^2.8.1",
+    "size-limit": "^8.2.6",
     "typescript": "^5.0.4",
     "vitest": "^0.32.2"
   },
@@ -89,6 +102,26 @@
   "simple-git-hooks": {
     "pre-commit": "pnpm format && pnpm lint:fix"
   },
+  "size-limit": [
+    {
+      "name": "import { mipdStore } from 'mipd'",
+      "path": "./dist/esm/index.js",
+      "limit": "386 B",
+      "import": "{ mipdStore }"
+    },
+    {
+      "name": "import { requestProviders } from 'mipd'",
+      "path": "./dist/esm/index.js",
+      "limit": "129 B",
+      "import": "{ requestProviders }"
+    },
+    {
+      "name": "import { announceProvider } from 'mipd'",
+      "path": "./dist/esm/index.js",
+      "limit": "132 B",
+      "import": "{ announceProvider }"
+    }
+  ],
   "packageManager": "pnpm@8.3.1",
   "dependencies": {
     "viem": "^1.1.4"

@@ -1,7 +1,7 @@
-import {
+import type {
   EIP6963AnnounceProviderEvent,
   EIP6963RequestProviderEvent,
-} from './eip6963.ts'
+} from './types.js'
 
 declare global {
   interface WindowEventMap {

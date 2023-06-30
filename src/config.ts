@@ -1,4 +1,4 @@
-import { EIP1193Provider } from 'viem'
+import type { EIP1193Provider } from 'viem'
 
 /**
  * Override `Config` to customize type options

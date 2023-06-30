@@ -1,13 +1,16 @@
-import { ResolvedConfig } from './config.ts'
+import type { ResolvedConfig } from './config.js'
 
-type Provider = ResolvedConfig['EIP1193Provider']
-type Rdns = ResolvedConfig['Rdns']
+////////////////////////////////////////////////////////////////////////////
+// Types
+
+export type EIP1193Provider = ResolvedConfig['EIP1193Provider']
+export type Rdns = ResolvedConfig['Rdns']
 
 /**
  * Event detail from the `"eip6963:announceProvider"` event.
  */
 export interface EIP6963ProviderDetail<
-  TProvider = Provider,
+  TProvider = EIP1193Provider,
   TRdns extends string = Rdns,
 > {
   info: EIP6963ProviderInfo<TRdns>
@@ -27,7 +30,7 @@ export interface EIP6963ProviderInfo<TRdns extends string = Rdns> {
 /**
  * Event type to announce an EIP-1193 Provider.
  */
-export interface EIP6963AnnounceProviderEvent<TProvider = Provider>
+export interface EIP6963AnnounceProviderEvent<TProvider = EIP1193Provider>
   extends CustomEvent<EIP6963ProviderDetail<TProvider>> {
   type: 'eip6963:announceProvider'
 }
