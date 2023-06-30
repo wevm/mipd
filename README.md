@@ -6,6 +6,9 @@
 
 - [Install](#install)
 - [Utilities](#utilities)
+  - [`createStore`](#createstore)
+  - [`requestProviders`](#requestproviders)
+  - [`announceProvider`](#announceprovider)
 - [`window` Type Polyfill](#window-polyfill)
 - [Types](#types)
 
@@ -17,7 +20,107 @@ npm i mipd
 
 ## Utilities
 
-###
+### createStore
+
+```ts
+import { createStore } from 'mipd'
+
+const store = createStore()
+
+// Subscribe to the MIPD Store.
+store.subscribe(providers => {
+  console.log(providers)
+  // => [EIP6963ProviderDetail, EIP6963ProviderDetail, ...]
+})
+
+// Retrieve emitted Provider Details.
+store.getProviders()
+// => [EIP6963ProviderDetail, EIP6963ProviderDetail, ...]
+
+// Find a Provider Detail.
+store.findProvider({ rdns: 'com.example' })
+// => EIP6963ProviderDetail | undefined
+
+// Remove a Provider Detail.
+store.removeProvider({ rdns: 'com.example' })
+
+// Clear the store, including all Provider Details.
+store.clear()
+
+// Reset the store, and emit an event to request Provider Details.
+store.reset()
+
+// Destroy the store, and remove all Provider Details and event listeners.
+store.destroy()
+```
+
+#### React
+
+```tsx
+import { useSyncExternalStore } from 'react'
+import { createStore } from 'mipd'
+
+const store = createStore()
+
+function Example() {
+  const providers = useSyncExternalStore(store.subscribe, store.getProviders)
+  // ...
+}
+```
+
+#### Svelte
+
+```html
+<script lang="ts">
+  import { createStore } from 'mipd'
+  import { readable } from 'svelte/store'
+  const store = createStore()
+  const providers = readable(store.getProviders(), store.subscribe)
+</script>
+
+<!-- ... -->
+```
+
+#### Vue
+
+```html
+<script setup lang="ts">
+  import { reactive } from 'vue'
+  import { createStore } from 'mipd'
+
+  const store = createStore()
+  const state = reactive({ providers: store.getProviders() })
+  store.subscribe(providers => (state.providers = providers))
+</script>
+
+<!-- ... -->
+```
+
+### requestProviders
+
+```ts
+import { requestProviders } from 'mipd'
+
+let providers = []
+
+const unsubscribe = requestProviders(providerDetail => providers.push(providerDetail))
+```
+
+### announceProvider
+
+```ts
+import { announceProvider } from 'mipd'
+
+const unsubscribe = announceProvider({
+  info: {
+    icon: 'https://example.com/icon.png',
+    name: 'Example',
+    rdns: 'com.example',
+    uuid: '00000000-0000-0000-0000-000000000000'
+  },
+  provider: new EIP1193Provider()
+})
+```
 
 ## `window` Polyfill
 
