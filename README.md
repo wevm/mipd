@@ -31,8 +31,8 @@ import { createStore } from 'mipd'
 const store = createStore()
 
 // Subscribe to the MIPD Store.
-store.subscribe(providers => {
-  console.log(providers)
+store.subscribe(providerDetails => {
+  console.log(providerDetails)
   // => [EIP6963ProviderDetail, EIP6963ProviderDetail, ...]
 })
 
