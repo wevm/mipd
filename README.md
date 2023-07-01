@@ -11,8 +11,6 @@
   TypeScript Utilities for <a href="https://eips.ethereum.org/EIPS/eip-6963">EIP-6963: Multi Injected Provider Discovery</a>
 <p>
 
-<br/>
-
 ## Contents
 
 - [Install](#install)
