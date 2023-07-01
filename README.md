@@ -5,8 +5,8 @@
 ## Contents
 
 - [Install](#install)
+- [Store](#store)
 - [Utilities](#utilities)
-  - [`createStore`](#createstore)
   - [`requestProviders`](#requestproviders)
   - [`announceProvider`](#announceprovider)
 - [`window` Type Polyfill](#window-polyfill)
@@ -18,13 +18,16 @@
 npm i mipd
 ```
 
-## Utilities
+## Store
 
-### createStore
+The MIPD Store stores the Providers that have been emitted by a Wallet (or other source), and provides a way to subscribe to the store and retrieve the Providers.
+
+### Overview
 
 ```ts
 import { createStore } from 'mipd'
 
+// Set up a MIPD Store, and request Providers.
 const store = createStore()
 
 // Subscribe to the MIPD Store.
@@ -33,7 +36,7 @@ store.subscribe(providers => {
   // => [EIP6963ProviderDetail, EIP6963ProviderDetail, ...]
 })
 
-// Retrieve emitted Provider Details.
+// Retrieve emitted Providers.
 store.getProviders()
 // => [EIP6963ProviderDetail, EIP6963ProviderDetail, ...]
 
@@ -44,14 +47,28 @@ store.findProvider({ rdns: 'com.example' })
 // Remove a Provider Detail.
 store.removeProvider({ rdns: 'com.example' })
 
-// Clear the store, including all Provider Details.
+// Clear the store, including all Providers.
 store.clear()
 
-// Reset the store, and emit an event to request Provider Details.
+// Reset the store, and emit an event to request Providers.
 store.reset()
 
-// Destroy the store, and remove all Provider Details and event listeners.
+// Destroy the store, and remove all Providers and event listeners.
 store.destroy()
+```
+
+### Usage
+
+#### Vanilla JS
+
+```tsx
+import { useSyncExternalStore } from 'react'
+import { createStore } from 'mipd'
+
+const store = createStore()
+
+let providers = store.getProviders()
+store.subscribe(_providers => (providers = _providers))
 ```
 
 #### React
@@ -96,7 +113,147 @@ function Example() {
 <!-- ... -->
 ```
 
+### API
+
+#### createStore()
+
+Creates a MIPD Store, and emits an event to request Providers from the Wallet(s).
+
+```ts
+const store = createStore()
+```
+
+#### store.subscribe(listener, args)
+
+Subscribes to the MIPD Store, and returns a function to unsubscribe.
+
+```ts
+const unsubscribe = store.subscribe(providers => {
+  console.log(providers)
+  // => [EIP6963ProviderDetail, EIP6963ProviderDetail, ...]
+})
+```
+
+**Definition**
+
+```ts
+export type Listener = (
+  // The updated Providers store.
+  providerDetails: EIP6963ProviderDetail[],
+  meta?: {
+    // The Providers that were added to the store.
+    added?: EIP6963ProviderDetail[]
+    // The Providers that were removed from the store.
+    removed?: EIP6963ProviderDetail[]
+  },
+) => void
+
+function subscribe(
+  // The listener function.
+  listener: Listener, 
+  args?: { 
+    // If `true`, the listener will be called immediately with the stored Providers.
+    emitImmediately?: boolean 
+  }
+): () => void // Returns an unsubscribe function.
+```
+
+#### store.getProviders()
+
+Returns the current Providers.
+
+```ts
+const providers = store.getProviders()
+// => [EIP6963ProviderDetail, EIP6963ProviderDetail, ...]
+```
+
+**Definition**
+
+```ts
+function getProviders(): EIP6963ProviderDetail[]
+```
+
+#### store.findProvider(args)
+
+Finds a provider detail by its RDNS (Reverse Domain Name Identifier).
+
+```ts
+const provider = store.findProvider({ rdns: 'com.example' })
+```
+
+**Definition**
+
+```ts
+function findProvider(args: { 
+  // The RDNS of the Provider Detail to find.
+  rdns: string 
+}): EIP6963ProviderDetail | undefined
+```
+
+#### store.removeProvider(args)
+
+Removes a Provider Detail from the store.
+
+```ts
+store.removeProvider({ rdns: 'com.example' })
+```
+
+**Definition**
+
+```ts
+function removeProvider(args: { 
+  // The RDNS of the Provider Detail to remove.
+  rdns: string 
+}): void
+```
+
+#### store.clear()
+
+Clears the store, including all Providers.
+
+```ts
+store.clear()
+```
+
+**Definition**
+
+```ts
+function clear(): void
+```
+
+#### store.reset()
+
+Resets the store, and emits an event to request Providers from the Wallet(s).
+
+```ts
+store.reset()
+```
+
+**Definition**
+
+```ts
+function reset(): void
+```
+
+#### store.destroy()
+
+Destroys the store, and removes all Providers and event listeners.
+
+```ts
+store.destroy()
+```
+
+**Definition**
+
+```ts
+function destroy(): void
+```
+
+## Utilities
+
 ### requestProviders
+
+The `requestProviders` utility emits an event to request Providers from the Wallet(s). It returns an `unsubscribe` function to clean up event listeners.
 
 ```ts
 import { requestProviders } from 'mipd'
@@ -106,7 +263,19 @@ let providers = []
 const unsubscribe = requestProviders(providerDetail => providers.push(providerDetail))
 ```
 
+**Definition**
+
+```ts
+function requestProviders(
+  // The listener.
+  listener: (providerDetail: EIP6963ProviderDetail) => void
+// Unsubscribe function to clean up the listener.
+): () => void
+```
+
 ### announceProvider
+
+The `announceProvider` utility emits an event to announce a Provider to the Wallet(s), and also listen for incoming requests. It returns an `unsubscribe` function to clean up event listeners.
 
 ```ts
 import { announceProvider } from 'mipd'
@@ -120,6 +289,16 @@ const unsubscribe = announceProvider({
   },
   provider: new EIP1193Provider()
 })
+```
+
+**Definition**
+
+```ts
+function requestProviders(
+  // The EIP-1193 Provider and Provider Info.
+  detail: EIP6963ProviderDetail
+// Unsubscribe function to clean up the listener.
+): () => void
 ```
 
 ## `window` Polyfill

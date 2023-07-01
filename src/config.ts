@@ -23,7 +23,7 @@ export interface DefaultConfig {
   /** The EIP-1193 Provider. */
   EIP1193Provider: EIP1193Provider
   /** Reverse Domain Name Notation (rDNS) of the Wallet Provider. */
-  Rdns: 'com.enkrypt' | 'io.metamask' | (string & {})
+  Rdns: string
 }
 
 /**

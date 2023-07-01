@@ -461,7 +461,7 @@ describe('createStore', () => {
     store.destroy()
   })
 
-  test('subscribe (once)', () => {
+  test('subscribe (emitImmediately)', () => {
     const store = createStore()
 
     announceProvider(detail_1)()
@@ -477,7 +477,7 @@ describe('createStore', () => {
     store.subscribe(
       (providerDetails, providerDetail) =>
         results.push([providerDetails, providerDetail]),
-      { once: true },
+      { emitImmediately: true },
     )
 
     expect(results.length).toBe(1)
@@ -534,7 +534,7 @@ describe('createStore', () => {
 
 test('requestProviders', async () => {
   const results: EIP6963ProviderDetail<EIP1193Provider>[] = []
-  const unwatch = requestProviders((providerDetail) => {
+  const unsubscribe = requestProviders((providerDetail) => {
     results.push(providerDetail)
   })
 
@@ -566,5 +566,5 @@ test('requestProviders', async () => {
     }
   `)
 
-  unwatch()
+  unsubscribe()
 })

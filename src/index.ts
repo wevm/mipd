@@ -27,7 +27,7 @@ export type Listener = (
   },
 ) => void
 
-export type CreateStore = {
+export type Store = {
   /**
    * @internal
    * Current state of listening listeners.
@@ -60,10 +60,10 @@ export type CreateStore = {
   /**
    * Subscribes to emitted provider details.
    */
-  subscribe(listener: Listener, args?: { once?: boolean }): () => void
+  subscribe(listener: Listener, args?: { emitImmediately?: boolean }): () => void
 }
 
-export function createStore(): CreateStore {
+export function createStore(): Store {
   const listeners: Set<Listener> = new Set()
   let providerDetails: EIP6963ProviderDetail[] = []
 
@@ -124,9 +124,9 @@ export function createStore(): CreateStore {
       unwatch()
       unwatch = request()
     },
-    subscribe(listener, { once } = {}) {
+    subscribe(listener, { emitImmediately } = {}) {
       listeners.add(listener)
-      if (once) listener(providerDetails, { added: providerDetails })
+      if (emitImmediately) listener(providerDetails, { added: providerDetails })
       return () => listeners.delete(listener)
     },
   }
