@@ -60,7 +60,10 @@ export type Store = {
   /**
    * Subscribes to emitted provider details.
    */
-  subscribe(listener: Listener, args?: { emitImmediately?: boolean }): () => void
+  subscribe(
+    listener: Listener,
+    args?: { emitImmediately?: boolean },
+  ): () => void
 }
 
 export function createStore(): Store {
