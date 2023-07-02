@@ -53,9 +53,6 @@ store.getProviders()
 store.findProvider({ rdns: 'com.example' })
 // => EIP6963ProviderDetail | undefined
 
-// Remove a Provider Detail.
-store.removeProvider({ rdns: 'com.example' })
-
 // Clear the store, including all Providers.
 store.clear()
 
@@ -197,23 +194,6 @@ function findProvider(args: {
   // The RDNS of the Provider Detail to find.
   rdns: string 
 }): EIP6963ProviderDetail | undefined
-```
-
-#### store.removeProvider(args)
-
-Removes a Provider Detail from the store.
-
-```ts
-store.removeProvider({ rdns: 'com.example' })
-```
-
-**Definition**
-
-```ts
-function removeProvider(args: { 
-  // The RDNS of the Provider Detail to remove.
-  rdns: string 
-}): void
 ```
 
 #### store.clear()

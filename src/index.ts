@@ -54,10 +54,6 @@ export type Store = {
    */
   reset(): void
   /**
-   * Removes a provider detail by its RDNS (Reverse Domain Name Identifier).
-   */
-  removeProvider(args: { rdns: Rdns }): void
-  /**
    * Subscribes to emitted provider details.
    */
   subscribe(
@@ -109,19 +105,6 @@ export function createStore(): Store {
     getProviders() {
       return providerDetails
     },
-    removeProvider({ rdns }) {
-      const providerDetail = providerDetails.find(
-        (providerDetail) => providerDetail.info.rdns === rdns,
-      )
-      if (!providerDetail) return
-
-      providerDetails = providerDetails.filter(
-        (providerDetail) => providerDetail.info.rdns !== rdns,
-      )
-      listeners.forEach((listener) =>
-        listener(providerDetails, { removed: [providerDetail] }),
-      )
-    },
     reset() {
       this.clear()
       unwatch()
@@ -152,7 +135,7 @@ export function announceProvider(
 ): AnnounceProviderReturnType {
   const event: CustomEvent<EIP6963ProviderDetail> = new CustomEvent(
     'eip6963:announceProvider',
-    { detail },
+    { detail: Object.freeze(detail) },
   )
 
   window.dispatchEvent(event)
