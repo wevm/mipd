@@ -31,13 +31,6 @@ test('EIP6963ProviderInfo', () => {
     uuid: '350670db-19fa-4704-a166-e52e178b59d2',
   }
   UnknownRdns_1
-
-  const NoRdns_1: EIP6963ProviderInfo = {
-    icon: 'https://example.com/icon.png',
-    name: 'Example Wallet',
-    uuid: '350670db-19fa-4704-a166-e52e178b59d2',
-  }
-  NoRdns_1
 })
 
 test('EIP6963ProviderDetail', () => {

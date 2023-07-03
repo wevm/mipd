@@ -17,7 +17,7 @@ export interface EIP6963ProviderDetail<
 export interface EIP6963ProviderInfo<TRdns extends string = Rdns> {
   icon: string
   name: string
-  rdns?: TRdns
+  rdns: TRdns
   uuid: string
 }
 
