@@ -30,8 +30,11 @@
     // Language and environment
     "moduleResolution": "NodeNext",
     "module": "ESNext",
-    "target": "ES2020",
-    "lib": ["ES2020", "DOM"],
+    "target": "ES2021", // Setting this to `ES2021` enables native support for `Node v16+`: https://github.com/microsoft/TypeScript/wiki/Node-Target-Mapping.
+    "lib": [
+      "ES2022", // By using ES2022 we get access to the `.cause` property on `Error` instances.
+      "DOM" // We are adding `DOM` here to get the `fetch`, etc. types. This should be removed once these types are available via DefinitelyTyped.
+    ],
 
     // Skip type checking for node modules
     "skipLibCheck": true

@@ -1,0 +1,12 @@
+{
+  "folders": [
+    {
+      "name": "mipd",
+      "path": "../"
+    },
+    {
+      "name": "playgrounds",
+      "path": "../playgrounds"
+    }
+  ]
+}

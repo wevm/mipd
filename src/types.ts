@@ -1,10 +1,4 @@
-import type { ResolvedConfig } from './config.js'
-
-////////////////////////////////////////////////////////////////////////////
-// Types
-
-export type EIP1193Provider = ResolvedConfig['EIP1193Provider']
-export type Rdns = ResolvedConfig['Rdns']
+import type { EIP1193Provider, Rdns } from './register.js'
 
 /**
  * Event detail from the `"eip6963:announceProvider"` event.

@@ -20,11 +20,20 @@
   - [`announceProvider`](#announceprovider)
 - [`window` Type Polyfill](#window-polyfill)
 - [Types](#types)
+- [Configuration](#configuration)
 
 ## Install
 
 ```bash
 npm i mipd
+```
+
+```bash
+pnpm add mipd
+```
+
+```bash
+yarn add mipd
 ```
 
 ## Store
@@ -74,7 +83,7 @@ import { createStore } from 'mipd'
 const store = createStore()
 
 let providers = store.getProviders()
-store.subscribe(_providers => (providers = _providers))
+store.subscribe(providerDetails => (providers = providerDetails))
 ```
 
 #### React
@@ -95,8 +104,9 @@ function Example() {
 
 ```html
 <script lang="ts">
-  import { createStore } from 'mipd'
   import { readable } from 'svelte/store'
+  import { createStore } from 'mipd'
+  
   const store = createStore()
   const providers = readable(store.getProviders(), store.subscribe)
 </script>
@@ -337,7 +347,7 @@ Event detail from `eip6963:announceProvider`.
 #### Import
 
 ```ts
-import type { EIP6963ProviderDetail } from 'mipd'
+import { type EIP6963ProviderDetail } from 'mipd'
 ```
 
 #### Definition
@@ -356,7 +366,7 @@ Metadata of the EIP-1193 Provider.
 #### Import
 
 ```ts
-import type { EIP6963ProviderInfo } from 'mipd'
+import { type EIP6963ProviderInfo } from 'mipd'
 ```
 
 #### Definition
@@ -377,7 +387,7 @@ Event type to announce an EIP-1193 Provider.
 #### Import
 
 ```ts
-import type { EIP6963AnnounceProviderEvent } from 'mipd'
+import { type EIP6963AnnounceProviderEvent } from 'mipd'
 ```
 
 #### Definition
@@ -396,7 +406,7 @@ Event type to request EIP-1193 Providers.
 #### Import
 
 ```ts
-import type { EIP6963RequestProviderEvent } from 'mipd'
+import { type EIP6963RequestProviderEvent } from 'mipd'
 ```
 
 #### Definition
@@ -409,22 +419,21 @@ export interface EIP6963RequestProviderEvent extends Event {
 
 ## Configuration
 
-In some cases you might want to tune the global configuration (ie. the `EIP1193Provider`). To do this, the following configuration options are available:
+In some cases you might want to tune the global types (e.g. the `EIP1193Provider`). To do this, the following configuration options are available:
 
-| Type                | Default                                         | Description            |
-| ------------------- | ----------------------------------------------- | ---------------------- |
-| `EIP1193Provider`   | `import('viem').EIP1193Provider`                | The EIP-1193 Provider. |
-| `Rdns`              | `'com.enkrypt' \| 'io.metamask' \| (string & {})` | Deterministic identifier for the Provider in the form of an rDNS (Reverse Domain Name Notation) |
+| Type                | Default                                                        | Description            |
+| ------------------- | -------------------------------------------------------------- | ---------------------- |
+| `provider`          | `import('viem').EIP1193Provider`                               | The EIP-1193 Provider. |
+| `rdns`              | `'com.coinbase' | 'com.enkrypt' | 'io.metamask' | 'io.zerion'` | Deterministic identifier for the Provider in the form of an rDNS (Reverse Domain Name Notation) |
 
-Configuration options are customizable using [declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html). Extend the `Config` interface either directly in your code or in a `d.ts` file (e.g. `eip6963.d.ts`):
+Configuration options are customizable using [declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html). Extend the `Register` interface either directly in your code or in a `d.ts` file (e.g. `eip6963.d.ts`):
 
 ```ts
-import type { EIP1193Provider } from './eip1193-provider'
+import { type EIP1193Provider } from './eip1193-provider'
 
-declare global {
-  interface Config {
-    EIP1193Provider: EIP1193Provider
-    Rdns: 'com.myapp' | 'com.example' | (string & {})
+declare module 'mipd' {
+  interface Register {
+    provider: EIP1193Provider
   }
 }
 ```
@@ -432,6 +441,7 @@ declare global {
 ## Authors
 
 - [@jxom](https://github.com/jxom) (jxom.eth, [Twitter](https://twitter.com/jakemoxey))
+- [@tmm](https://github.com/tmm) (awkweb.eth, [Twitter](https://twitter.com/awkweb))
 
 ## License
 
