@@ -11,7 +11,7 @@
     "build:types": "tsc --project tsconfig.build.json --module esnext --declarationDir ./dist/types --emitDeclarationOnly --declaration --declarationMap",
     "changeset": "changeset",
     "changeset:release": "pnpm build && changeset publish",
-    "changeset:version": "changeset version && pnpm install --lockfile-only && pnpm bun scripts/updateVersion.ts",
+    "changeset:version": "changeset version && pnpm install --lockfile-only",
     "clean": "rimraf dist *.tsbuildinfo",
     "dev:react": "pnpm build && pnpm --filter vite-react dev",
     "dev:svelte": "pnpm build && pnpm --filter vite-svelte dev",

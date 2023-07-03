@@ -35,7 +35,6 @@ jobs:
         run: |
           npm --no-git-tag-version version minor
           npm --no-git-tag-version version $(npm pkg get version | sed 's/"//g')-canary.$(date +'%Y%m%dT%H%M%S')
-          pnpm bun scripts/updateVersion.ts
 
       - name: Build
         run: pnpm build
