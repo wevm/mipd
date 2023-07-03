@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "rome.rome",
+    "orta.vscode-twoslash-queries",
+    "svelte.svelte-vscode",
+    "Vue.volar",
+    "Vue.vscode-typescript-vue-plugin"
+  ]
+}

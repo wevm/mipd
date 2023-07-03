@@ -2,6 +2,8 @@
   "name": "mipd",
   "description": "TypeScript Utilities for EIP-6963",
   "version": "0.0.4",
+  "license": "MIT",
+  "repository": "wagmi-dev/mipd",
   "scripts": {
     "build": "pnpm run clean && pnpm run build:cjs && pnpm run build:esm && pnpm run build:types",
     "build:cjs": "tsc --project tsconfig.build.json --module commonjs --outDir ./dist/cjs --removeComments --verbatimModuleSyntax false && echo > ./dist/cjs/package.json '{\"type\":\"commonjs\"}'",
@@ -22,12 +24,6 @@
     "test:cov": "vitest dev --coverage",
     "typecheck": "tsc --noEmit && vitest typecheck"
   },
-  "type": "module",
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/esm/index.js",
-  "types": "./dist/types/index.d.ts",
-  "typings": "./dist/types/index.d.ts",
-  "sideEffects": false,
   "files": [
     "dist",
     "!dist/**/*.tsbuildinfo",
@@ -36,6 +32,12 @@
     "!src/**/*.test-d.ts",
     "!src/_test/**/*"
   ],
+  "sideEffects": false,
+  "type": "module",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
+  "typings": "./dist/types/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
@@ -51,9 +53,7 @@
   },
   "typesVersions": {
     "*": {
-      "window": [
-        "./src/window.d.ts"
-      ]
+      "window": ["./src/window.d.ts"]
     }
   },
   "peerDependencies": {
@@ -63,6 +63,9 @@
     "typescript": {
       "optional": true
     }
+  },
+  "dependencies": {
+    "viem": "^1.1.4"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.4.8",
@@ -78,30 +81,21 @@
     "simple-git-hooks": "^2.8.1",
     "size-limit": "^8.2.6",
     "typescript": "^5.0.4",
+    "vite": "^4.3.9",
     "vitest": "^0.32.2"
   },
-  "license": "MIT",
-  "repository": "wagmi-dev/mipd",
-  "authors": [
-    "awkweb.eth",
-    "jxom.eth"
-  ],
+  "contributors": ["jxom.eth <j@wagmi.sh>", "awkweb.eth <t@wagmi.sh>"],
   "funding": [
     {
       "type": "github",
       "url": "https://github.com/sponsors/wagmi-dev"
     }
   ],
-  "keywords": [
-    "eth",
-    "ethereum",
-    "dapps",
-    "wallet",
-    "web3"
-  ],
+  "keywords": ["eth", "ethereum", "dapps", "wallet", "web3", "eip", "6963"],
   "simple-git-hooks": {
     "pre-commit": "pnpm format && pnpm lint:fix"
   },
+  "packageManager": "pnpm@8.3.1",
   "size-limit": [
     {
       "name": "import { createStore } from 'mipd'",
@@ -121,9 +115,5 @@
       "limit": "132 B",
       "import": "{ announceProvider }"
     }
-  ],
-  "packageManager": "pnpm@8.3.1",
-  "dependencies": {
-    "viem": "^1.1.4"
-  }
+  ]
 }
