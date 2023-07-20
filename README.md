@@ -424,7 +424,7 @@ In some cases you might want to tune the global types (e.g. the `EIP1193Provider
 | Type                | Default                                                        | Description            |
 | ------------------- | -------------------------------------------------------------- | ---------------------- |
 | `provider`          | `import('viem').EIP1193Provider`                               | The EIP-1193 Provider. |
-| `rdns`              | `'com.coinbase' \| 'com.enkrypt' \| 'io.metamask' \| 'io.zerion'` | Deterministic identifier for the Provider in the form of an rDNS (Reverse Domain Name Notation) |
+| `rdns`              | `'com.coinbase' \| 'com.enkrypt' \| 'io.metamask' \| 'io.zerion' \| (string & {})` | Deterministic identifier for the Provider in the form of an rDNS (Reverse Domain Name Notation) |
 
 Configuration options are customizable using [declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html). Extend the `Register` interface either directly in your code or in a `d.ts` file (e.g. `eip6963.d.ts`):
 
