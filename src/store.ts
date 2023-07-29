@@ -81,7 +81,7 @@ export function createStore(): Store {
     destroy() {
       this.clear()
       listeners.clear()
-      unwatch()
+      unwatch?.()
     },
     findProvider({ rdns }) {
       return providerDetails.find(
@@ -93,7 +93,7 @@ export function createStore(): Store {
     },
     reset() {
       this.clear()
-      unwatch()
+      unwatch?.()
       unwatch = request()
     },
     subscribe(listener, { emitImmediately } = {}) {

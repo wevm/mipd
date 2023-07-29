@@ -37,7 +37,7 @@ export function announceProvider(
 export type RequestProvidersParameters = (
   providerDetail: EIP6963ProviderDetail,
 ) => void
-export type RequestProvidersReturnType = () => void
+export type RequestProvidersReturnType = (() => void) | undefined
 
 /**
  * Watches for EIP-1193 Providers to be announced.
@@ -45,6 +45,7 @@ export type RequestProvidersReturnType = () => void
 export function requestProviders(
   listener: RequestProvidersParameters,
 ): RequestProvidersReturnType {
+  if (typeof window === 'undefined') return
   const handler = (event: EIP6963AnnounceProviderEvent) =>
     listener(event.detail)
 
