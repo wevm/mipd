@@ -59,5 +59,5 @@ test('requestProviders', async () => {
     }
   `)
 
-  unsubscribe()
+  unsubscribe?.()
 })
