@@ -15,7 +15,7 @@ export interface EIP6963ProviderDetail<
  * Metadata of the EIP-1193 Provider.
  */
 export interface EIP6963ProviderInfo<TRdns extends string = Rdns> {
-  icon: string
+  icon: `data:image/${string}` // RFC-2397
   name: string
   rdns: TRdns
   uuid: string

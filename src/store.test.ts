@@ -8,7 +8,7 @@ import { announceProvider } from './utils.js'
 
 const detail_1 = {
   info: {
-    icon: 'https://example.io/icon.png',
+    icon: 'data:image/svg+xml,<svg width="32px" height="32px" viewBox="0 0 32 32"/>',
     name: 'Example Wallet',
     rdns: 'org.example',
     uuid: '350670db-19fa-4704-a166-e52e178b59d2',
@@ -18,7 +18,7 @@ const detail_1 = {
 
 const detail_2 = {
   info: {
-    icon: 'https://foo.io/icon.png',
+    icon: 'data:image/svg+xml,<svg width="32px" height="32px" viewBox="0 0 32 32"/>',
     name: 'Foo Wallet',
     rdns: 'org.foo',
     uuid: '12345555-19fa-4704-a166-e52e178b59d2',
@@ -121,7 +121,7 @@ describe('createStore', () => {
       [
         {
           "info": {
-            "icon": "https://example.io/icon.png",
+            "icon": "data:image/svg+xml,<svg width=\\"32px\\" height=\\"32px\\" viewBox=\\"0 0 32 32\\"/>",
             "name": "Example Wallet",
             "rdns": "org.example",
             "uuid": "350670db-19fa-4704-a166-e52e178b59d2",
@@ -137,7 +137,7 @@ describe('createStore', () => {
       [
         {
           "info": {
-            "icon": "https://example.io/icon.png",
+            "icon": "data:image/svg+xml,<svg width=\\"32px\\" height=\\"32px\\" viewBox=\\"0 0 32 32\\"/>",
             "name": "Example Wallet",
             "rdns": "org.example",
             "uuid": "350670db-19fa-4704-a166-e52e178b59d2",
@@ -146,7 +146,7 @@ describe('createStore', () => {
         },
         {
           "info": {
-            "icon": "https://foo.io/icon.png",
+            "icon": "data:image/svg+xml,<svg width=\\"32px\\" height=\\"32px\\" viewBox=\\"0 0 32 32\\"/>",
             "name": "Foo Wallet",
             "rdns": "org.foo",
             "uuid": "12345555-19fa-4704-a166-e52e178b59d2",
@@ -162,7 +162,7 @@ describe('createStore', () => {
       [
         {
           "info": {
-            "icon": "https://example.io/icon.png",
+            "icon": "data:image/svg+xml,<svg width=\\"32px\\" height=\\"32px\\" viewBox=\\"0 0 32 32\\"/>",
             "name": "Example Wallet",
             "rdns": "org.example",
             "uuid": "350670db-19fa-4704-a166-e52e178b59d2",
@@ -171,7 +171,7 @@ describe('createStore', () => {
         },
         {
           "info": {
-            "icon": "https://foo.io/icon.png",
+            "icon": "data:image/svg+xml,<svg width=\\"32px\\" height=\\"32px\\" viewBox=\\"0 0 32 32\\"/>",
             "name": "Foo Wallet",
             "rdns": "org.foo",
             "uuid": "12345555-19fa-4704-a166-e52e178b59d2",
@@ -218,7 +218,7 @@ describe('createStore', () => {
         [
           {
             "info": {
-              "icon": "https://example.io/icon.png",
+              "icon": "data:image/svg+xml,<svg width=\\"32px\\" height=\\"32px\\" viewBox=\\"0 0 32 32\\"/>",
               "name": "Example Wallet",
               "rdns": "org.example",
               "uuid": "350670db-19fa-4704-a166-e52e178b59d2",
@@ -230,7 +230,7 @@ describe('createStore', () => {
           "added": [
             {
               "info": {
-                "icon": "https://example.io/icon.png",
+                "icon": "data:image/svg+xml,<svg width=\\"32px\\" height=\\"32px\\" viewBox=\\"0 0 32 32\\"/>",
                 "name": "Example Wallet",
                 "rdns": "org.example",
                 "uuid": "350670db-19fa-4704-a166-e52e178b59d2",
@@ -246,7 +246,7 @@ describe('createStore', () => {
         [
           {
             "info": {
-              "icon": "https://example.io/icon.png",
+              "icon": "data:image/svg+xml,<svg width=\\"32px\\" height=\\"32px\\" viewBox=\\"0 0 32 32\\"/>",
               "name": "Example Wallet",
               "rdns": "org.example",
               "uuid": "350670db-19fa-4704-a166-e52e178b59d2",
@@ -255,7 +255,7 @@ describe('createStore', () => {
           },
           {
             "info": {
-              "icon": "https://foo.io/icon.png",
+              "icon": "data:image/svg+xml,<svg width=\\"32px\\" height=\\"32px\\" viewBox=\\"0 0 32 32\\"/>",
               "name": "Foo Wallet",
               "rdns": "org.foo",
               "uuid": "12345555-19fa-4704-a166-e52e178b59d2",
@@ -267,7 +267,7 @@ describe('createStore', () => {
           "added": [
             {
               "info": {
-                "icon": "https://foo.io/icon.png",
+                "icon": "data:image/svg+xml,<svg width=\\"32px\\" height=\\"32px\\" viewBox=\\"0 0 32 32\\"/>",
                 "name": "Foo Wallet",
                 "rdns": "org.foo",
                 "uuid": "12345555-19fa-4704-a166-e52e178b59d2",
@@ -290,7 +290,7 @@ describe('createStore', () => {
             "removed": [
               {
                 "info": {
-                  "icon": "https://example.io/icon.png",
+                  "icon": "data:image/svg+xml,<svg width=\\"32px\\" height=\\"32px\\" viewBox=\\"0 0 32 32\\"/>",
                   "name": "Example Wallet",
                   "rdns": "org.example",
                   "uuid": "350670db-19fa-4704-a166-e52e178b59d2",
@@ -299,7 +299,7 @@ describe('createStore', () => {
               },
               {
                 "info": {
-                  "icon": "https://foo.io/icon.png",
+                  "icon": "data:image/svg+xml,<svg width=\\"32px\\" height=\\"32px\\" viewBox=\\"0 0 32 32\\"/>",
                   "name": "Foo Wallet",
                   "rdns": "org.foo",
                   "uuid": "12345555-19fa-4704-a166-e52e178b59d2",
@@ -350,7 +350,7 @@ describe('createStore', () => {
           [
             {
               "info": {
-                "icon": "https://example.io/icon.png",
+                "icon": "data:image/svg+xml,<svg width=\\"32px\\" height=\\"32px\\" viewBox=\\"0 0 32 32\\"/>",
                 "name": "Example Wallet",
                 "rdns": "org.example",
                 "uuid": "350670db-19fa-4704-a166-e52e178b59d2",
@@ -359,7 +359,7 @@ describe('createStore', () => {
             },
             {
               "info": {
-                "icon": "https://foo.io/icon.png",
+                "icon": "data:image/svg+xml,<svg width=\\"32px\\" height=\\"32px\\" viewBox=\\"0 0 32 32\\"/>",
                 "name": "Foo Wallet",
                 "rdns": "org.foo",
                 "uuid": "12345555-19fa-4704-a166-e52e178b59d2",
@@ -371,7 +371,7 @@ describe('createStore', () => {
             "added": [
               {
                 "info": {
-                  "icon": "https://example.io/icon.png",
+                  "icon": "data:image/svg+xml,<svg width=\\"32px\\" height=\\"32px\\" viewBox=\\"0 0 32 32\\"/>",
                   "name": "Example Wallet",
                   "rdns": "org.example",
                   "uuid": "350670db-19fa-4704-a166-e52e178b59d2",
@@ -380,7 +380,7 @@ describe('createStore', () => {
               },
               {
                 "info": {
-                  "icon": "https://foo.io/icon.png",
+                  "icon": "data:image/svg+xml,<svg width=\\"32px\\" height=\\"32px\\" viewBox=\\"0 0 32 32\\"/>",
                   "name": "Foo Wallet",
                   "rdns": "org.foo",
                   "uuid": "12345555-19fa-4704-a166-e52e178b59d2",
