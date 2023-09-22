@@ -8,7 +8,7 @@
 </p>
 
 <p align="center">
-  TypeScript Utilities for <a href="https://eips.ethereum.org/EIPS/eip-6963">EIP-6963: Multi Injected Provider Discovery</a>
+ Tatum TypeScript KMS Utilities for <a href="https://eips.ethereum.org/EIPS/eip-6963">EIP-6963: Multi Injected Provider Discovery</a>
 <p>
 
 ## Contents
