@@ -17,7 +17,7 @@ test('EIP6963ProviderInfo', () => {
   expectTypeOf<EIP6963ProviderInfo['uuid']>().toEqualTypeOf<string>
 
   const KnownRdns_1: EIP6963ProviderInfo = {
-    icon: 'https://metamask.io/icon.png',
+    icon: 'data:image/svg+xml,<svg width="32px" height="32px" viewBox="0 0 32 32"/>',
     name: 'MetaMask',
     rdns: 'io.metamask',
     uuid: '350670db-19fa-4704-a166-e52e178b59d2',
@@ -25,7 +25,7 @@ test('EIP6963ProviderInfo', () => {
   KnownRdns_1
 
   const UnknownRdns_1: EIP6963ProviderInfo = {
-    icon: 'https://wallet.example.org/icon.png',
+    icon: 'data:image/svg+xml,<svg width="32px" height="32px" viewBox="0 0 32 32"/>',
     name: 'Example Wallet',
     rdns: 'org.example',
     uuid: '350670db-19fa-4704-a166-e52e178b59d2',
