@@ -1,5 +1,11 @@
 # mipd
 
+## 0.0.7
+
+### Patch Changes
+
+- [`1f71eef`](https://github.com/wevm/mipd/commit/1f71eef452f3c8d38b4f7485eb76fbe7475d2977) Thanks [@tmm](https://github.com/tmm)! - Bumped Viem version
+
 ## 0.0.6
 
 ### Patch Changes
