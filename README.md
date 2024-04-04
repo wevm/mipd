@@ -77,7 +77,6 @@ store.destroy()
 #### Vanilla JS
 
 ```tsx
-import { useSyncExternalStore } from 'react'
 import { createStore } from 'mipd'
 
 const store = createStore()
