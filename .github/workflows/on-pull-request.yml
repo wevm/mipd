@@ -26,6 +26,6 @@ jobs:
         uses: ./.github/actions/install-dependencies
 
       - name: Report build size
-        uses: preactjs/compressed-size-action@v2
+        uses: wevm/actions/vendor/preactjs/compressed-size-action/2.8.0@b518cf981b50a4c745a8b7335fc693f34b108a75 # v1.0.1
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
