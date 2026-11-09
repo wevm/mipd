@@ -21,13 +21,13 @@ jobs:
 
     steps:
       - name: Clone repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Install dependencies
         uses: ./.github/actions/install-dependencies
 
       - name: Setup .npmrc file
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           registry-url: 'https://registry.npmjs.org'
 
@@ -52,7 +52,7 @@ jobs:
 
     steps:
       - name: Clone repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
           fetch-depth: 0
@@ -61,7 +61,7 @@ jobs:
         uses: ./.github/actions/install-dependencies
 
       - name: Create version pull request or publish to npm
-        uses: wevm/actions/vendor/changesets/action/v1@31d7c5bc5f75932a367cf341ca5e26818eb9ec9d # upstream v1.9.0
+        uses: wevm/actions/vendor/changesets/action/v1@9bf103bd47b43c77baa02648201039b6ef3d713b # upstream v1.9.0
         with:
           title: 'chore: version packages'
           commit: 'chore: version packages'
