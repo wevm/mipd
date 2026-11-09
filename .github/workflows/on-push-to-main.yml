@@ -61,7 +61,7 @@ jobs:
         uses: ./.github/actions/install-dependencies
 
       - name: Create version pull request or publish to npm
-        uses: changesets/action@v1
+        uses: wevm/actions/vendor/changesets/action/v1@31d7c5bc5f75932a367cf341ca5e26818eb9ec9d # upstream v1.9.0
         with:
           title: 'chore: version packages'
           commit: 'chore: version packages'
