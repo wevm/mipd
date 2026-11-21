@@ -101,16 +101,16 @@ function Example() {
 
 #### Svelte
 
-```html
+```svelte
 <script lang="ts">
-  import { readable } from 'svelte/store'
   import { createStore } from 'mipd'
-  
-  const store = createStore()
-  const providers = readable(store.getProviders(), store.subscribe)
+
+  const providers = createStore()
 </script>
 
-<!-- ... -->
+{#each $providers as provider}
+  <!-- ... -->
+{/each}
 ```
 
 #### Vue
