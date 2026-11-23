@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - name: Clone repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Install dependencies
         uses: ./.github/actions/install-dependencies
@@ -18,7 +18,7 @@ jobs:
       - name: Lint code
         run: pnpm format && pnpm lint:fix
       
-      - uses: wevm/actions/vendor/stefanzweifel/git-auto-commit-action/v6.0.1@b518cf981b50a4c745a8b7335fc693f34b108a75 # v1.0.1
+      - uses: wevm/actions/vendor/stefanzweifel/git-auto-commit-action/v6.0.1@e0e99cfdac7c74eadc3ee7281015c0bf0496d6ac # v1.0.4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -33,7 +33,7 @@ jobs:
 
     steps:
       - name: Clone repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Install dependencies
         uses: ./.github/actions/install-dependencies
@@ -48,7 +48,7 @@ jobs:
 
     steps:
       - name: Clone repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Install dependencies
         uses: ./.github/actions/install-dependencies
@@ -69,7 +69,7 @@ jobs:
 
     steps:
       - name: Clone repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Install dependencies
         uses: ./.github/actions/install-dependencies
@@ -78,4 +78,4 @@ jobs:
         run: pnpm test:cov
 
       - name: Upload coverage reports to Codecov
-        uses: wevm/actions/vendor/codecov/codecov-action/v4.6.0@b518cf981b50a4c745a8b7335fc693f34b108a75 # v1.0.1
+        uses: wevm/actions/vendor/codecov/codecov-action/v4.6.0@e0e99cfdac7c74eadc3ee7281015c0bf0496d6ac # v1.0.4

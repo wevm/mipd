@@ -20,12 +20,12 @@ jobs:
 
     steps:
       - name: Clone repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Install dependencies
         uses: ./.github/actions/install-dependencies
 
       - name: Report build size
-        uses: wevm/actions/vendor/preactjs/compressed-size-action/2.8.0@b518cf981b50a4c745a8b7335fc693f34b108a75 # v1.0.1
+        uses: wevm/actions/vendor/preactjs/compressed-size-action/2.8.0@e0e99cfdac7c74eadc3ee7281015c0bf0496d6ac # v1.0.4
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
